@@ -1,0 +1,17 @@
+{
+    "State": 1
+    , "isManager": "false"
+    , "FirstName": "Nir"
+    , "LastName": "Bagir"
+    , "FullName": "Nir Bagir"
+    , "TimeCreated": "getdate()"
+    , "Birthday": "2026-1-2"
+    , "isTeacher": "false"
+}
+
+
+
+string query = @"
+                    insert into Users (State, isManager, FirstName, LastName, FullName, TimeCreated, Birthday, isTeacher) 
+                    values (" + user.State + @",'" + user.isManager + @"','" + user.FirstName + @"','" + user.LastName + @"','" + user.FullName 
+                    + @"', " + user.TimeCreated + @",'" + user.Birthday + @"','" + user.isTeacher + @"') ";

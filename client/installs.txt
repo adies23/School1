@@ -1,0 +1,13 @@
+npm i react-router-dom
+npm i bootsrtap
+npm i react-bootstrap
+npm react-router-bootstrap
+npm install @material-ui/core
+npm install @material-ui/core --force
+npm install @mui/icons-material
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
+npm install material-table --save
+npm install --save bootstrap@^4.0.0-alpha.6  react-bootstrap@^0.32.1
+npm install @mui/lab date-fns --force
+npm install @material/button
+npm install --save react-modal

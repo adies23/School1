@@ -1,0 +1,9 @@
+
+.signup__form--container,
+.login__form--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70vh;
+    justify-content: center;
+}
