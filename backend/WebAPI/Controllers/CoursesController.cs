@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select Id, State, Name, convert(varchar, TimeCreated, 29) as TimeCreated
+                    select Id, State, Name, TimeCreated
                     from Courses";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
@@ -48,26 +48,46 @@ namespace WebAPI.Controllers
         [HttpPost]
         public JsonResult Post(Courses Course)
         {
-            string query = @"
-                    insert into Courses (Name, state, TimeCreated)
-                    values ('" + Course.Name + @"'," + Course.State + @",'" + Course.TimeCreated + @"') ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
+                string isExistNameQuery = @"
+                    select Id from Courses where Name = '" + Course.Name + @"'";
+
+                string query = @"
+                        insert into Courses (Name, state, TimeCreated)
+                        values (N'" + Course.Name + @"',1 ,getdate() ) ";
+
                 myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+
+                using (SqlCommand myCommandExistName = new SqlCommand(isExistNameQuery, myCon))
                 {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
+                    //check why when i try to inert row i got error
+                    long count = 0;
+                    if (myCommandExistName.ExecuteScalar() != null)
+                    {
+                        count = (long)myCommandExistName.ExecuteScalar();
+                    }
 
-                    myReader.Close();
-                    myCon.Close();
+                    if (count > 0)
+                    {
+                        return new JsonResult("Name already exists");
+                    }
+                    else
+                    {
+                        using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                        {
+                            myReader = myCommand.ExecuteReader();
+                            table.Load(myReader);
+
+                            myReader.Close();
+                            myCon.Close();
+                        }
+                    }
                 }
-
             }
-
             return new JsonResult("Added Successfuly");
         }
 

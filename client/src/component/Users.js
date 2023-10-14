@@ -18,7 +18,7 @@ function Users() {
             //setLoading(false);
             const jsonData = JSON.stringify(data);  
             setTableData(data);     
-            //console.log('Data: ' + JSON.stringify(data));     
+            console.log('Data: ' + JSON.stringify(data));     
         }).catch((e) => {
             //setLoading(false);
             console.log(e);
@@ -44,7 +44,8 @@ function Users() {
       {field:"PhoneNumber", headerName: "Phone Number", type: 'numeric', width: 140,}, 
       {field:"isTeacher", headerName: "Is Teacher", type: 'boolean', width: 90}, 
       {field:"isManager", headerName: "Is Manager", type: 'boolean', width: 90}, 
-      {field:"actions", headerName: "Actions", type: 'actions', width: 150, renderCell: (params) => (<UserActions {...{ params}} />)}
+      {field:"actions", headerName: "Actions", type: 'actions', width: 150, renderCell: (params) => (<UserActions {...{ params}} />)},
+      {field:"TimeCreated", headerName: "Time Created", type: 'date', width: 100,valueGetter: (params) => new Date(params.value),}
     ];
    
     useEffect(() => {

@@ -28,6 +28,7 @@ export default function AddUser  ({ open, close })  {
         const post = { 
             FirstName: FirstName, 
             LastName: LastName, 
+            FullName: FirstName + ' ' + LastName, 
             Birthday: Birthday, 
             Email: Email, 
             PhoneNumber: PhoneNumber, 
@@ -36,7 +37,6 @@ export default function AddUser  ({ open, close })  {
         }
         console.log("post", JSON.stringify(post));
         addData(post);
-        console.log('Submit');
     }
 
     const addData = async (data) => {
@@ -48,14 +48,16 @@ export default function AddUser  ({ open, close })  {
             //for alert message, delete if not work well 
             if(data == 'Email already exists'){
                 handleAlert(data,'error');
+                console.log('Email already exists');
             }else{
                 //handleAlert(data,'Success');
                 setTypeAlertMessage('Success');
                 setAlertMessage(data);                
                 setOpenAlert(true);
+                console.log('Added Successfuly');
             }
             // 
-            //alert(data);
+            alert(data);
         }).catch((e) => {
             setIsLoading(false);
             console.log(e);

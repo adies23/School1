@@ -4,9 +4,12 @@ create table Users(
 	Id bigint identity (1,1) primary key,
 	State int, 
 	isManager bit,
-	FirstName varchar(250), 
-	LastName varchar(250), 
-	FullName varchar(500), 
+	--FirstName varchar(250), 
+	--LastName varchar(250), 
+	--FullName varchar(500), 
+	FirstName nvarchar(max), 
+	LastName nvarchar(max), 
+	FullName nvarchar(max), 
 	TimeCreated DATETIME, 
 	Birthday date,
 	PhoneNumber varchar(25),
@@ -17,14 +20,16 @@ create table Users(
 create table Courses(
 	Id bigint identity(1,1) primary key,
 	State int,
-	Name varchar(500),
+	--Name varchar(500),
+	Name nvarchar(max), 
 	TimeCreated DATETIME
 )
 
 create table CoursesDetails(
 	Id bigint identity(1,1) primary key,
 	State int,
-	Name varchar(500),
+	--Name varchar(500),
+	Name nvarchar(max), 
 	TimeCreated DATETIME,
 	StartDate date,
 	refTeacherId bigint FOREIGN KEY REFERENCES Users(Id),
@@ -41,14 +46,16 @@ values ('Adi', 'Eshete', 'Adi Eshete', GETDATE(), '1988-10-9', 1, 'true')
 ,('Dvir', 'Hamadbir', 'Dvir Hamadbir', GETDATE(), '2000-1-1', 1, 'false')
 
 insert into Courses(State, Name, TimeCreated)
-values(1, 'JAVA', GETDATE())
-	, (1, 'React', GETDATE())
-	, (1, 'Ruby', GETDATE())
-	, (1, '.Net', GETDATE())
-	, (1, 'JavaScript', GETDATE())
+values('JAVA', GETDATE())
+	, ('React', GETDATE())
+	, ('Ruby', GETDATE())
+	, ('.Net', GETDATE())
+	, ('JavaScript', GETDATE())
 	
 update Users set Email = FirstName + LastName +  '@' + 'SchoolDB.com', PhoneNumber = '0544444444' where id = 1
 update Users set Email = FirstName + LastName +  '@' + 'SchoolDB.com', PhoneNumber = '0555555555' where id = 2
 update Users set Email = FirstName + LastName +  '@' + 'SchoolDB.com', PhoneNumber = '0533333333' where id = 3
-	
+
+update Courses set state = 1
+
 /*End - check if need to run */

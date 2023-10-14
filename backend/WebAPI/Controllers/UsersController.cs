@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select Id, State, FirstName, LastName, FullName, convert(varchar, Birthday, 103) as Birthday, PhoneNumber, Email, isTeacher, isManager from Users";
+                    select Id, State, FirstName, LastName, FullName, convert(varchar, Birthday, 103) as Birthday, PhoneNumber, Email, isTeacher, isManager, TimeCreated as TimeCreated from Users";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;
@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
                 //        update Users set Birthday = '2024-1-1' where id = 1";
                 string query = @"
                     insert into Users (State, isManager, FirstName, LastName, FullName, TimeCreated, Birthday, Email, PhoneNumber, isTeacher) 
-                    values (1,'" + user.isManager + @"','" + user.FirstName + @"','" + user.LastName + @"','" + user.FullName
+                    values (1,'" + user.isManager + @"',N'" + user.FirstName + @"',N'" + user.LastName + @"',N'" + user.FullName
                         + @"', getdate(),'" + user.Birthday + @"','" + user.Email + @"','" + user.PhoneNumber + @"','" + user.isTeacher + @"') ";
 
                 myCon.Open();
