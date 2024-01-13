@@ -24,7 +24,8 @@ namespace WebAPI.Controllers
         {
             string query = @"
                     select Id, State, Name, TimeCreated
-                    from Courses";
+                    from Courses
+                    where state = 1";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;

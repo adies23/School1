@@ -11,3 +11,6 @@ npm install --save bootstrap@^4.0.0-alpha.6  react-bootstrap@^0.32.1
 npm install @mui/lab date-fns --force
 npm install @material/button
 npm install --save react-modal
+npm install moment --save
+npm install date-fns --save
+npm install @material-ui/core

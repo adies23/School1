@@ -18,7 +18,7 @@ function Users() {
             //setLoading(false);
             const jsonData = JSON.stringify(data);  
             setTableData(data);     
-            console.log('Data: ' + JSON.stringify(data));     
+            console.log('Data: ' + JSON.stringify(data));  
         }).catch((e) => {
             //setLoading(false);
             console.log(e);

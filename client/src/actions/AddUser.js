@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Loading from '../component/Loading'
 import axios from '../axios/axios';
 import { Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, TextField, FormControlLabel, Button, FormGroup, Alert } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import 'dayjs/locale/de';
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { deDE } from '@mui/x-date-pickers/locales';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import moment from "moment";
+import { format } from 'date-fns';
 
 export default function AddUser  ({ open, close })  {
     const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +24,7 @@ export default function AddUser  ({ open, close })  {
     //
 
     const [FirstName, setFirstName] = useState('');
-    const [LastName, setLastName] = useState('');
+    const [LastName, setLastName] = useState(''); 
     const [Birthday, setBirthday] = useState('');
     const [Email, setEmail] = useState('');
     const [PhoneNumber, setPhoneNumber] = useState('');
@@ -125,6 +134,9 @@ export default function AddUser  ({ open, close })  {
     }
     console.log('alertMessageEnd: ' + alertMessage);
     //
+    const handleChangeBirthday = (newValue) => { 
+        setBirthday(newValue.format('YYYY-MM-DD'));
+      };
   return (
     <div className='container'>
         <Dialog PaperProps={{ sx: { borderRadius: "4%" } }} open={open} fullWidth maxWidth='sm'>
@@ -144,12 +156,22 @@ export default function AddUser  ({ open, close })  {
                             }}
                             value={LastName}>                                
                         </TextField>
-                        <TextField variant='outlined' label='Birthday'
+                        {/* <TextField variant='outlined' label='Birthday'
                             onChange={(event) => {
                                 setBirthday(event.target.value)
                             }}
                             value={Birthday}>                                
-                        </TextField>
+                        </TextField>					 */}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer components={['DatePicker', 'DatePicker']}>
+                                <DatePicker
+                                    variant='outlined' 
+                                    label='Birthday'
+                                    value={Birthday}
+                                    onChange={handleChangeBirthday}>
+                                </DatePicker>
+                            </DemoContainer>
+                        </LocalizationProvider>
                         <TextField variant='outlined' label='Email'
                             onChange={(event) => {
                                 setEmail(event.target.value)

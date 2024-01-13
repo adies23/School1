@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select Id, State, FirstName, LastName, FullName, convert(varchar, Birthday, 103) as Birthday, PhoneNumber, Email, isTeacher, isManager, TimeCreated as TimeCreated from Users";
+                    select Id, State, FirstName, LastName, FullName, Birthday as Birthday, PhoneNumber, Email, isTeacher, isManager, TimeCreated as TimeCreated from Users";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;
@@ -45,6 +45,33 @@ namespace WebAPI.Controllers
 
             }
             
+            return new JsonResult(table);
+        }
+
+        [HttpGet("forAddCourseDetails")]
+
+        public JsonResult Get(string isTeacher)
+        {
+            string query = @"
+                    select Id, State, FirstName, LastName, FullName, Birthday as Birthday, PhoneNumber, Email, isTeacher, isManager, TimeCreated as TimeCreated from Users 
+                    where isTeacher = N'" + isTeacher + @"'";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+
+            }
+
             return new JsonResult(table);
         }
 
@@ -70,7 +97,6 @@ namespace WebAPI.Controllers
 
                 using (SqlCommand myCommandExistMail = new SqlCommand(isExistEmailQuery, myCon))
                 {
-                    //check why when i try to inert row i got error
                     long count = 0;
                     if (myCommandExistMail.ExecuteScalar() != null)
                     {

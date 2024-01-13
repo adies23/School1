@@ -59,3 +59,32 @@ update Users set Email = FirstName + LastName +  '@' + 'SchoolDB.com', PhoneNumb
 update Courses set state = 1
 
 /*End - check if need to run */
+
+
+--10/28/23: need ti fix this before run
+/*
+create table Semester(
+	Id bigint identity(1,1) primary key,
+	State int,
+	Name nvarchar(max), 
+	TimeCreated DATETIME
+)
+
+create table AcademicYear(
+	Id bigint identity(1,1) primary key,
+	State int,
+	Name nvarchar(max), -- 2023-2024
+	StartYear date, --2023
+	EndYear date, --2024
+	TimeCreated DATETIME
+)
+
+create table SemesterDates(
+	Id bigint identity(1,1) primary key,
+	State int,
+	Name nvarchar(max), 
+	TimeCreated DATETIME,
+	StartDate date,
+	--refSemesterId bigint FOREIGN KEY REFERENCES Semester(Id)
+)
+*/
