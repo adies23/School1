@@ -10,7 +10,7 @@ import CoursesDetails from '../component/CoursesDetails';
 function AdminPage() {  
 
     return (
-        <div>
+        <div >
             <Users />
             <Courses />
             <CoursesDetails />

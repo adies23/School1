@@ -58,6 +58,9 @@ update Users set Email = FirstName + LastName +  '@' + 'SchoolDB.com', PhoneNumb
 
 update Courses set state = 1
 
+ALTER TABLE CoursesDetails
+ADD HowManyStudents int;
+
 /*End - check if need to run */
 
 

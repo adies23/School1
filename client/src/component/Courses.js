@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import axios from '../axios/axios';
 import { DataGrid } from '@mui/x-data-grid';
 import AddCourse from '../actions/AddCourse';
+import classes from './Courses.module.css';
 
 function Courses() {
   const [addCourseShow, setAddCourseShow] = useState(false);
@@ -49,7 +50,7 @@ function Courses() {
       <Box sx={{ height: 400, width: '100%' }} style={{width: '70%', marginLeft: 'auto', marginRight: 'auto', marginTop: '3%'}}>
         <Button 
           variant="contained" 
-          style={{marginRight: '90%'}}
+          style={{whiteSpace: 'nowrap', marginRight: '90%',border: '1px solid black', borderRadius: '10px'}}
           onClick={openAddCourse}
         >Add Course</Button>
          <DataGrid
@@ -70,6 +71,11 @@ function Courses() {
            pageSizeOptions={[5]}
            checkboxSelection
            disableRowSelectionOnClick
+           sx={{
+             backgroundColor: "white",
+             border: "2px solid black",
+             borderRadius: "13px"
+           }}
          />
        </Box>
     </div>

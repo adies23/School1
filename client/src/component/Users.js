@@ -6,6 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import UserActions from '../component/UserActions';
 import AddUser from '../actions/AddUser';
+import classes from './Users.module.css';
 
 function Users() { 
     const [addUserShow, setAddUserShow] = useState(false);
@@ -59,10 +60,10 @@ function Users() {
       <Box sx={{ height: 400, width: '100%' }} style={{width: '70%', marginLeft: 'auto', marginRight: 'auto', marginTop: '3%'}} >
         <Button 
           variant="contained" 
-          style={{marginRight: '90%'}}
+          style={{whiteSpace: 'nowrap', marginRight: '90%',border: '1px solid black', borderRadius: '10px'}}
           onClick={openAddUser}
         >Add User</Button>
-          <DataGrid
+          <DataGrid 
             getRowId={(row) => row.Id}
             columns={columns} 
             rows={tableData}
@@ -80,6 +81,11 @@ function Users() {
             pageSizeOptions={[5]}
             checkboxSelection
             disableRowSelectionOnClick
+            sx={{
+              backgroundColor: "white",
+              border: "2px solid black",
+              borderRadius: "13px"
+            }}
           />
         </Box>
         

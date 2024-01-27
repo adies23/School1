@@ -15,6 +15,7 @@ export default function AddCoursesDetails  ({ open, close })  {
     const [StartDate, setStartDate] = useState('');
     const [CourseId, setCourseId] = useState(-1);
     const [TeacherId, setTeacherId] = useState(-1); 
+    const [HowManyStudents, setHowManyStudents] = useState(); 
     
     const [tableData, setTableData]=useState([]);
     const [tableCourseData, setTableCourseData]=useState([]);
@@ -45,8 +46,8 @@ export default function AddCoursesDetails  ({ open, close })  {
         const post = { 
             Name: Name, 
             StartDate: StartDate, 
-            CourseId: CourseId, 
-            TeacherId: TeacherId, 
+            refCourseId: CourseId, 
+            refTeacherId: TeacherId, 
         }
         console.log("post", JSON.stringify(post));
         addData(post); 
@@ -94,6 +95,12 @@ export default function AddCoursesDetails  ({ open, close })  {
         setCourseId(event.target.value);
     };
 
+    const handleHowManyStudentsChange = (event) => {
+        // Ensure only numbers are entered
+        const value = event.target.value.replace(/[^0-9]/g, '');
+        setHowManyStudents(value);
+      };
+
     useEffect(() => {
         setIsLoading(true);
         fetchData();
@@ -116,7 +123,8 @@ export default function AddCoursesDetails  ({ open, close })  {
                             onChange={(event) => {
                                 setName(event.target.value)
                             }}
-                            value={Name}>
+                            value={Name}
+                            required>
                         </TextField>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker', 'DatePicker']}>
@@ -124,7 +132,8 @@ export default function AddCoursesDetails  ({ open, close })  {
                                     variant='outlined' 
                                     label='StartDate'
                                     value={StartDate}
-                                    onChange={handleChangeStartDate}>
+                                    onChange={handleChangeStartDate}
+                                    required>
                                 </DatePicker>
                             </DemoContainer>
                         </LocalizationProvider>
@@ -138,6 +147,7 @@ export default function AddCoursesDetails  ({ open, close })  {
                                 id="mySelect"
                                 value={CourseId}
                                 onChange={handleSelectCourse}
+                                required
                                 >
                                 <MenuItem disabled value={-1}>No value selected</MenuItem>
                                     {tableCourseData.map((course) => (
@@ -157,6 +167,7 @@ export default function AddCoursesDetails  ({ open, close })  {
                                 id="mySelect"
                                 value={TeacherId}
                                 onChange={handleSelectTeacher}
+                                required
                                 >
                                 <MenuItem disabled value={-1}>No value selected</MenuItem>
                                 {tableData.map((userName) => (
@@ -166,6 +177,14 @@ export default function AddCoursesDetails  ({ open, close })  {
                                 ))}
                             </Select>
                         </FormControl>
+                        <TextField
+                         variant='outlined'
+                        label="How Many Students"
+                        type="text"
+                        value={HowManyStudents}
+                        onChange={handleHowManyStudentsChange}
+                        required
+                        />
                         <FormGroup style={{display: 'inline', marginTop: '12%'}}>
                             <Button type="submit" style={{width: '50%'}} variant='contained'>Submit</Button>
                             <Button style={{width: '50%'}} variant='outlined' onClick={close}>Close</Button>

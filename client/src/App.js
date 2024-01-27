@@ -11,7 +11,7 @@ import Navigation from './component/Navigation';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter >
         <Navigation />
         <Routes>
           <Route path="*" element = {<Home />}/>

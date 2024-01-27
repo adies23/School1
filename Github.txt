@@ -1,0 +1,6 @@
+adies23/School1.
+
+push to master:
+git add .
+git commit -m "Add code"
+git push -u origin master

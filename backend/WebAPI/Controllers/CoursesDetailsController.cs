@@ -23,9 +23,13 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select Id, State, Name, convert(varchar, TimeCreated, 29) as TimeCreated
-                    from CoursesDetails
-                    where state = 1";
+                    select coursesDetail.Id as Id, coursesDetail.State as State, coursesDetail.Name as Name, coursesDetail.StartDate as StartDate, teacher.FullName as Teacher, course.Name as Course
+	                    , coursesDetail.TimeCreated as TimeCreated
+                    from CoursesDetails coursesDetail left join Users teacher
+	                    on teacher.Id = coursesDetail.refTeacherId
+                    left join Courses course
+	                    on course.Id = coursesDetail.refCourseId
+                    where coursesDetail.state = 1";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;
@@ -58,11 +62,11 @@ namespace WebAPI.Controllers
                     select id
                     from CoursesDetails
                     where State = 1
-	                    and (StartDate = " + CoursesDetail.StartDate + @" or refCourseId = " + CoursesDetail.refCourseId + @" or refTeacherId = " + CoursesDetail.refTeacherId + @")";
+	                    and (StartDate = '" + CoursesDetail.StartDate + @"' and refCourseId = " + CoursesDetail.refCourseId + @" and refTeacherId = " + CoursesDetail.refTeacherId + @")";
                 
                 string query = @"
                         insert into CoursesDetails (Name, State, TimeCreated, StartDate, refCourseId, refTeacherId)
-                        values (N'" + CoursesDetail.Name + @"', 1, getdate(), " + CoursesDetail.StartDate + @", " + CoursesDetail.refCourseId + @", " + CoursesDetail.refTeacherId + @")";
+                        values (N'" + CoursesDetail.Name + @"', 1, getdate(), '" + CoursesDetail.StartDate + @"', " + CoursesDetail.refCourseId + @", " + CoursesDetail.refTeacherId + @")";
 
                 myCon.Open();
 
@@ -77,7 +81,7 @@ namespace WebAPI.Controllers
 
                     if (count > 0)
                     {
-                        return new JsonResult("Name already exists");
+                        return new JsonResult("Course already exists");
                     }
                     else
                     {

@@ -1,3 +1,11 @@
+
+body{
+  background-image: url(./Images/Pencils2.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +43,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.app-Background{
+  background-image: url('./Images/Pencils.jpg');
+}
+
+.app-Background1{
+  display: flex;
+  height: 100vh;
+  background-image: url('./Images/Background1.jpg');
 }
