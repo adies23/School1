@@ -9,11 +9,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class StudyFieldsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
 
-        public CoursesController(IConfiguration configuration)
+        public StudyFieldsController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -23,10 +23,9 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select course.Id as Id, course.State as State, course.Name as Name, studyField.Name as StudyField, course.TimeCreated as TimeCreated
-                    from Courses course left join StudyField studyField
-                        on studyField.id = course.refStudyFieldId
-                    where course.state = 1";
+                    select Id, State, Name, TimeCreated
+                    from StudyField
+                    where state = 1";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;
@@ -48,7 +47,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public JsonResult Post(Courses Course)
+        public JsonResult Post(StudyFields StudyField)
         {
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
@@ -56,11 +55,11 @@ namespace WebAPI.Controllers
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
                 string isExistNameQuery = @"
-                    select Id from Courses where Name = '" + Course.Name + @"'";
+                    select Id from StudyField where Name = '" + StudyField.Name + @"'";
 
                 string query = @"
-                        insert into Courses (Name, refStudyFieldId, state, TimeCreated)
-                        values (N'" + Course.Name + @"', " + Course.refStudyFieldId + @",1 ,getdate() ) ";
+                        insert into StudyField (Name, state, TimeCreated)
+                        values (N'" + StudyField.Name + @"',1 ,getdate() ) ";
 
                 myCon.Open();
 
@@ -94,12 +93,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public JsonResult Put(Courses Course)
+        public JsonResult Put(StudyFields StudyField)
         {
             string query = @"
-                    update Courses
-                    set Name = '" + Course.Name + @"'
-                    where id = " + Course.Id;
+                    update StudyField
+                    set Name = '" + StudyField.Name + @"'
+                    where id = " + StudyField.Id;
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;
@@ -121,13 +120,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete]
-        public JsonResult Delete(Courses Course)
+        public JsonResult Delete(StudyFields StudyField)
         {
             //string query = @"
             //        update Users set Birthday = '2024-1-1' where id = 1";
             string query = @"
-                    delete from Courses
-                    where id = " + Course.Id;
+                    delete from StudyField
+                    where id = " + StudyField.Id;
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DBAppCon");
             SqlDataReader myReader;

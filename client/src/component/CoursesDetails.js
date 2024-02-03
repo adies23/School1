@@ -42,7 +42,7 @@ function CoursesDetails() {
     {field:"StartDate", headerName: "Start Date", type: 'date', width: 100,valueGetter: (params) => new Date(params.value),}, 
     {field: 'Course', headerName: 'Course', width: 120, },      
     {field: 'Teacher', headerName: 'Teacher', width: 120, },      
-    {field: 'HowManyStudents', headerName: 'HowManyStudents', width: 140 },
+    {field: 'HowManyStudents', headerName: 'How Many Students', width: 140 },
     {field:"TimeCreated", headerName: "Time Created", type: 'date', width: 100, editable: true,valueGetter: (params) => new Date(params.value),}, 
 
   ];

@@ -61,6 +61,31 @@ update Courses set state = 1
 ALTER TABLE CoursesDetails
 ADD HowManyStudents int;
 
+create table StudyField(
+	Id bigint identity(1,1) primary key,
+	State int,
+	Name nvarchar(max), 
+	TimeCreated DATETIME
+)
+
+create table UserStudyFields(
+	Id bigint identity(1,1),
+	State int,
+	refUsersId bigint, 
+	refStudyFieldId bigint,
+	primary key (refUsersId, refStudyFieldId),
+	foreign key (refUsersId) references Users,
+	foreign key (refStudyFieldId) references StudyField,
+	TimeCreated DATETIME
+)
+
+ALTER TABLE courses
+ADD refStudyFieldId bigint;
+
+ALTER TABLE courses
+--ADD CONSTRAINT fk_Courses_StudyField
+ADD FOREIGN KEY (refStudyFieldId) REFERENCES StudyField (Id);
+
 /*End - check if need to run */
 
 

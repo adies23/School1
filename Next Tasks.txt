@@ -1,1 +1,7 @@
-23/12/23: add a field of teacher to AddCoursesDetails function from DB
+23/12/23: add a field of teacher to AddCoursesDetails function from DB. **DONE**
+2/2/24: add study field table. add lookup field in courses. create table of users-study field (many to many). **DONE**
+2/2/24: add data to new tables. **DONE**
+2/2/24: organize the log in.
+2/2/24: let student choose couerses of there study field but check how many student can be in the course.
+2/2/24: Teachers can write about them (field with 10 characters and field with rich text) 
+and disaply what they write in cards with drill to new page about them.

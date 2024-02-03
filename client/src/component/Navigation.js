@@ -17,9 +17,6 @@ function Navigation() {
         <Nav /*activeKey={location.pathname}*/ className="ms-auto"> 
           <NavDropdown title="Admin" id="basic-nav-dropdown">
             <NavDropdown.Item href="/adminPage">Admin Page</NavDropdown.Item>
-            <NavDropdown.Item href="/createNewUser">Create New User</NavDropdown.Item>
-            <NavDropdown.Item href="/createCoursesDetails">Create Course</NavDropdown.Item>
-            <NavDropdown.Item href="/createCoursesDetails">Create Courses Details</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">

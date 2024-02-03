@@ -6,12 +6,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import Users from '../component/Users';
 import Courses from '../component/Courses';
 import CoursesDetails from '../component/CoursesDetails';
+import StudyFields from '../component/StudyField';
 
 function AdminPage() {  
 
     return (
         <div >
             <Users />
+            <StudyFields />
             <Courses />
             <CoursesDetails />
         </div>
